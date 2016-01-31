@@ -1,0 +1,10 @@
+{
+    "name": "konstantin-s/silex-lazycache",
+    "description": "Simple cache provider. Stores URIs last-modified time and hash in DB. Do comparing on requests, return 304 code or code 200 and add record to DB.",
+    "require": {
+        "silex/silex": "~1.3",
+        "doctrine/dbal": "~2.2",
+        "symfony/http-kernel": "<3.0"
+    }
+
+}
