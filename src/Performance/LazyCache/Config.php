@@ -46,6 +46,9 @@ class Config {
     }
 
     public function setMaxAge($maxAge) {
+        if (!filter_var($maxAge, FILTER_VALIDATE_INT, array('options' => array('min_range' => 0)))) {
+            throw new InvalidArgumentException(__METHOD__ . " failed: value must be >= 0!");
+        }
         $this->maxAge = $maxAge;
     }
 
@@ -54,6 +57,9 @@ class Config {
     }
 
     public function setMaxAgeShared($maxAgeShared) {
+        if (!filter_var($maxAgeShared, FILTER_VALIDATE_INT, array('options' => array('min_range' => 0)))) {
+            throw new InvalidArgumentException(__METHOD__ . " failed: value must be >= 0!");
+        }
         $this->maxAgeShared = $maxAgeShared;
     }
 
@@ -73,7 +79,10 @@ class Config {
         return $this->cacheCompromisingRoutes;
     }
 
-    public function setCacheableRoutes($cacheableRoutes) {
+    public function setCacheableRoutes(array $cacheableRoutes) {
+        if (!isset($cacheableRoutes) || empty($cacheableRoutes)) {
+            throw new InvalidArgumentException(__METHOD__ . " failed: value must  not be empty!");
+        }
         $this->cacheableRoutes = $cacheableRoutes;
     }
 
@@ -82,7 +91,9 @@ class Config {
      * @param array $cacheCompromisingRoutes Routes names
      */
     public function setCacheCompromisingRoutes(array $cacheCompromisingRoutes) {
-
+        if (!isset($cacheCompromisingRoutes) || empty($cacheCompromisingRoutes)) {
+            throw new InvalidArgumentException(__METHOD__ . " failed: value must  not be empty!");
+        }
         $this->cacheCompromisingRoutes = $cacheCompromisingRoutes;
 //        $values = array();
 //        foreach ($cacheCompromisingRoutes as $routeName) {
